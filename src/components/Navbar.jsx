@@ -41,7 +41,7 @@ const UserBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   gap: '20px',
   alignItems: 'center',
-  height: '132px',
+  height: '80px',
   flex : '0.5',
   [theme.breakpoints.up('sm')]: {
     display: 'none'
@@ -63,7 +63,7 @@ function Navbar({mode, setMode}) {
         <Box flex={1}  
           sx={{
             display:'flex', 
-            height : { xs : 132, sm : 'auto'} ,
+            height : { xs : 80, sm : 'auto'} ,
             padding : { xs : 2, sm : 0} ,
             // border : '1px solid red',
             // backgroundColor : 'red'
