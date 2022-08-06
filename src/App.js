@@ -25,7 +25,6 @@ function App() {
     <ThemeProvider theme={darkTheme} >
       <Box bgcolor={"background.default"} color={'text.primary'} >
           <Navbar mode={mode}  setMode={setMode} sideBar={sideBar} setSidebar={setSidebar} rightBar={rightBar} setRightBar={setRightBar}  />
-          <DrawerMenu/>
           <Stack direction='row' spacing={2} justifyContent='space-between' >
               <SideBar mode={mode}  setMode={setMode}/>
               <Feed/>

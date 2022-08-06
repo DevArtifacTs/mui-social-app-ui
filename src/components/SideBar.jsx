@@ -85,9 +85,7 @@ function SideBar({mode, setMode}) {
 
                 }
               })
-
             }
-
           </List>
         </nav>
       </Box>

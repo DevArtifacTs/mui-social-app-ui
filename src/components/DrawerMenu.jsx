@@ -5,6 +5,21 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import ForumIcon from '@mui/icons-material/Forum';
 
+//sidebar
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
+import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
+import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
+import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+
+//components
+import SideBar from './SideBar';
+import RightBar from './RightBar';
+
 function DrawerMenu({ appendSide}) {
     const [state, setState] = React.useState({
         top: false,
@@ -20,6 +35,29 @@ function DrawerMenu({ appendSide}) {
     
         setState({ ...state, [anchor]: open });
       };
+      const [menuList, setMenuList] = React.useState([
+        
+      ])
+
+      React.useEffect(()=> {
+        if ( appendSide === 'left'){
+            setMenuList([
+            { id: 1, icon: <HomeOutlinedIcon />, text: 'Home' },
+            { id: 2, icon: <GroupOutlinedIcon />, text: 'Friends' },
+            { id: 3, icon: <GroupsOutlinedIcon />, text: 'Groups' },
+            { id: 4, icon: <StorefrontOutlinedIcon />, text: 'Store' },
+            { id: 5, icon: <VideocamOutlinedIcon />, text: 'Videos' },
+            { id: 6, icon: <DescriptionOutlinedIcon />, text: 'Description' },
+            { id: 7, icon: <BookmarksOutlinedIcon />, text: 'Bookmarks' },
+            { id: 8, icon: <EventNoteOutlinedIcon />, text: 'Events' },
+            { id: 9, icon: <SettingsOutlinedIcon />, text: 'Settings' },
+        ])
+        } 
+        else if ( appendSide === 'right'){
+            setMenuList('')
+        }
+      }, [appendSide])
+
 
       const list = (anchor) => (
         <Box
@@ -28,7 +66,7 @@ function DrawerMenu({ appendSide}) {
           onClick={toggleDrawer(anchor, false)}
           onKeyDown={toggleDrawer(anchor, false)}
         >
-          <List>
+          {/* <List>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
@@ -52,11 +90,26 @@ function DrawerMenu({ appendSide}) {
                 </ListItemButton>
               </ListItem>
             ))}
+          </List> */}
+          {/* <SideBar/> */}
+          <List>
+          {menuList.length > 0 &&
+              menuList.map(item => {
+                  return (
+                    <ListItem key={item.id} disablePadding    >
+                      <ListItemButton component='a' href={`#${item.text}`} sx={{paddingLeft : 0}}>
+                        <ListItemIcon>
+                          {item.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={item.text} />
+                      </ListItemButton>
+                    </ListItem>
+                  )
+              })
+            }
           </List>
         </Box>
       );
-
-
 
   return (
     <div>
