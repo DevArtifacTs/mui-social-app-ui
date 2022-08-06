@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { AppBar, Toolbar, styled, Typography, Box, InputBase, Badge, Avatar, Menu, MenuItem, Autocomplete, IconButton, Stack, Tooltip, Switch, List, ListItem, ListItemButton, ListItemIcon } from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu';
 import ForumIcon from '@mui/icons-material/Forum';
 import MailIcon from '@mui/icons-material/Mail';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import ModeNightOutlinedIcon from '@mui/icons-material/ModeNightOutlined';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import DrawerMenu from './DrawerMenu';
 
 
 //data
@@ -23,7 +23,7 @@ const Search = styled('div')(({ theme }) => ({
   padding: '0 10px',
   borderRadius: theme.shape.borderRadius,
   width: '40%'
-  
+
 }))
 
 const Icons = styled(Box)(({ theme }) => ({
@@ -42,75 +42,78 @@ const UserBox = styled(Box)(({ theme }) => ({
   gap: '20px',
   alignItems: 'center',
   height: '80px',
-  flex : '0.5',
+  flex: '0.5',
   [theme.breakpoints.up('sm')]: {
     display: 'none'
   }
 
 }))
 
-function Navbar({mode, setMode}) {
+function Navbar({ mode, setMode, sideBar, setSidebar, rightBar, setRightBar }) {
 
   const [open, setOpen] = useState(false)
 
 
   return (
-    <AppBar 
-      position='sticky' 
-      // sx={{backgroundColor : 'green'}} 
+    <AppBar
+      position='sticky'
+    // sx={{backgroundColor : 'green'}} 
     >
       <StyledToolbar>
-        <Box flex={1}  
+        <Box flex={1}
           sx={{
-            display:'flex', 
-            height : { xs : 80, sm : 'auto'} ,
-            padding : { xs : 2, sm : 0} ,
+            display: 'flex',
+            height: { xs: 80, sm: 'auto' },
+            padding: { xs: 2, sm: 0 },
             // border : '1px solid red',
             // backgroundColor : 'red'
-            }}
+          }}
         >
           <Box>
 
-        <Typography 
-          variant='h6' 
-          sx={{ 
-            display: { xs: 'block', sm: 'block' },
-            fontFamily: 'roboto',
-            fontWeight: 700,
-            fontSize: '1.5rem',
-            letterSpacing: '.1rem',
-            color: 'inherit',
-          }} 
-          >
-        MeeT
-      </Typography>
-      <IconButton >
-                {mode === 'light' ? <ModeNightOutlinedIcon sx={{color :'white'}} onClick={() => setMode('dark')} /> : <LightModeIcon onClick={() => setMode('light')} />}
-              </IconButton>
+            <Typography
+              variant='h6'
+              sx={{
+                display: { xs: 'block', sm: 'block' },
+                fontFamily: 'roboto',
+                fontWeight: 700,
+                fontSize: '1.5rem',
+                letterSpacing: '.1rem',
+                color: 'inherit',
+              }}
+            >
+              MeeT
+            </Typography>
+            <IconButton sx={{display : { sx : 'block', sm :'none'}}}  >
+              {mode === 'light' ? <ModeNightOutlinedIcon sx={{ color: 'white' }} onClick={() => setMode('dark')} /> : <LightModeIcon onClick={() => setMode('light')} />}
+            </IconButton>
+          </Box>
+
+          <Stack ml={4} direction='row' sx={{ display: { xs: 'block', sm: 'none', } }}>
+            <IconButton onClick={(e)=> setSidebar(!sideBar) } >
+              <Tooltip title='Menu' >
+                <DrawerMenu appendSide={'left'} />
+                {/* <MenuIcon sx={{ color: "white" }} /> */}
+              </Tooltip>
+            </IconButton>
+            <IconButton>
+              <Tooltip title='Messenger' >
+                <DrawerMenu appendSide={'right'} />
+                {/* <ForumIcon sx={{ color: "white" }} /> */}
+              </Tooltip>
+            </IconButton>
+          </Stack>
+
         </Box>
-      
-        <Stack ml={4} direction='row'  sx ={{display : { xs: 'block', sm: 'none',   }}}>
-          <IconButton>
-            <Tooltip title='Menu' >
-              <MenuIcon sx={{color:"white"}} />
-            </Tooltip>
-          </IconButton>
-          <IconButton>
-            <Tooltip title='Messenger' >
-              <ForumIcon sx={{color:"white"}} />
-            </Tooltip>
-          </IconButton>
-        </Stack>
-          
-      </Box>
-      <Search
-        sx={{
-          backgroundColor : 'background.default',
-          color : 'text.primary',
-          display : { xs: 'none', sm: 'block' },
-        }}
+        <Search
+          sx={{
+            backgroundColor: 'background.default',
+            color: 'text.primary',
+            display: { xs: 'none', sm: 'block' },
+            flexGrow : '1',
+          }}
         >
-          <InputBase error={true} color={'red'}  placeholder='...Search' autoFocus={true} /> 
+          <InputBase error={true} color={'red'} placeholder='...Search' autoFocus={true} />
           {/* <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -121,16 +124,16 @@ function Navbar({mode, setMode}) {
         </Search>
 
         <Icons>
-            <IconButton sx={{ color: 'white' }} aria-label="add an alarm">
-          <Badge badgeContent={4} color="error">
+          <IconButton sx={{ color: 'white' }} aria-label="add an alarm">
+            <Badge badgeContent={4} color="error">
               <MailIcon color="white" />
-          </Badge>
-            </IconButton>
-            <IconButton sx={{ color: 'white' }} aria-label="add an alarm">
-          <Badge badgeContent={4} color="error">
+            </Badge>
+          </IconButton>
+          <IconButton sx={{ color: 'white' }} aria-label="add an alarm">
+            <Badge badgeContent={4} color="error">
               <CircleNotificationsIcon color="white" />
-          </Badge>
-            </IconButton>
+            </Badge>
+          </IconButton>
           <IconButton sx={{ color: 'white' }} aria-label="add an alarm">
             <Avatar sx={{ width: 30, height: 30 }}
               onClick={(e) => setOpen(true)}
@@ -139,15 +142,15 @@ function Navbar({mode, setMode}) {
             />
           </IconButton>
         </Icons>
-        <UserBox  sx={{display : 'flex', justifyContent:'center', alignItems : 'stretch' }}>
-            <Stack sx={{textAlign:'center', display : 'flex', flexDirection : 'column', justifyContent:'space-between', alignItems : 'stretch'}}>
-              <IconButton onClick={(e) => setOpen(true)} sx={{ color: 'white' }} aria-label="add an alarm">
-                <Avatar sx={{ width: 30, height: 30 }} alt="Remy Sharp" src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" />
-              </IconButton>
-              {/* <IconButton>
+        <UserBox sx={{ display: 'flex', justifyContent: 'center', alignItems: 'stretch' }}>
+          <Stack sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'stretch' }}>
+            <IconButton onClick={(e) => setOpen(true)} sx={{ color: 'white' }} aria-label="add an alarm">
+              <Avatar sx={{ width: 30, height: 30 }} alt="Remy Sharp" src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" />
+            </IconButton>
+            {/* <IconButton>
                 {mode === 'light' ? <LightModeIcon onClick={() => setMode('dark')} /> : <ModeNightOutlinedIcon onClick={() => setMode('light')} />}
               </IconButton> */}
-            </Stack>
+          </Stack>
         </UserBox>
       </StyledToolbar>
       <Menu
@@ -169,17 +172,17 @@ function Navbar({mode, setMode}) {
         <MenuItem >My account</MenuItem>
         <MenuItem >Logout</MenuItem>
       </Menu>
-      <Box sx={{display : 'flex', justifyContent: 'center', width:'100%'}}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
         <Search
           sx={{
-            backgroundColor : 'background.default',
-            color : 'text.primary',
-            width : '80%',
-            margin : 2,
-            display : { xs: 'block', sm: 'none' },
+            backgroundColor: 'background.default',
+            color: 'text.primary',
+            width: '80%',
+            margin: 2,
+            display: { xs: 'block', sm: 'none' },
           }}
-          >
-            <InputBase error={true} color={'red'}  placeholder='...Search' autoFocus={true} /> 
+        >
+          <InputBase error={true} color={'red'} placeholder='...Search' autoFocus={true} />
         </Search>
       </Box>
     </AppBar>
