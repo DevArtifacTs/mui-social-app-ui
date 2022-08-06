@@ -68,6 +68,7 @@ function RightBar() {
           marginRight: '2rem',
           height: '100%'
         }}
+        bgcolor={"background.default"} color={'text.primary'}
       >
         <Typography variant='h6' mt={1} mb={2} ml={2} >
           Online friends
