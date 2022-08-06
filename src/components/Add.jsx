@@ -9,16 +9,23 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 
 const style = {
     position: 'absolute',
+    display : 'flex',
+    flexDirection : 'column',
+    justifyContent : 'space-between',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    height: 'auto',
+    width: '60%',
+    height: '50%',
     bgcolor: 'background.paper',
     border: '1px solid #000',
     borderRadius: '15px',
     boxShadow: 24,
     p: 4,
+    // set different styles for different screen sizes when view port is 0px - 600px (0 - sm)
+    // [theme.breakpoints.down('sm')] : {
+    //     display : 'none'
+    // }
 };
 
 const UserBox = styled(Box)(({ theme }) => ({
