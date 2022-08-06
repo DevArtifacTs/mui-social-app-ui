@@ -45,7 +45,7 @@ function SideBar({mode, setMode}) {
       position: 'relative',
       display: { xs: 'none', sm: 'block' }
     }}
-      flex={1} p={2}
+      flex={1.5} p={2}
     >
       <Box 
         // position='fixed' 
