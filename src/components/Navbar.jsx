@@ -18,6 +18,7 @@ const Search = styled('div')(({ theme }) => ({
   padding: '0 10px',
   borderRadius: theme.shape.borderRadius,
   width: '40%'
+  
 }))
 
 const Icons = styled(Box)(({ theme }) => ({
@@ -52,15 +53,20 @@ function Navbar() {
         <Typography variant='h6' sx={{ display: { xs: 'none', sm: 'block' } }}>PeoGather</Typography>
         {/* display when xs and hide when sm or more than sm */}
         <TravelExploreIcon sx={{ display: { xs: 'block', sm: 'none' } }} />
-        <Search>
-          {/* <InputBase error={true}  placeholder='...Search' autoFocus={true} />  */}
-          <Autocomplete
+        <Search
+        sx={{
+          backgroundColor : 'background.default',
+          color : 'text.primary',
+        }}
+        >
+          <InputBase error={true} color={'red'}  placeholder='...Search' autoFocus={true} /> 
+          {/* <Autocomplete
             disablePortal
             id="combo-box-demo"
             options={top100Films}
             sx={{ width: 300 }}
-            renderInput={(params) => <InputBase {...params} error={true} placeholder='...Search' autoFocus={true} />}
-          />
+            renderInput={(params) => <InputBase color={'black'} {...params} error={true} placeholder='...Search' autoFocus={true} />}
+          /> */}
         </Search>
         {/* <Icons sx={{display : {xs : 'none', sm : 'block'}}}> */}
         <Icons>
