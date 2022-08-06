@@ -53,26 +53,25 @@ function Navbar({ mode, setMode, sideBar, setSidebar, rightBar, setRightBar }) {
 
   const [open, setOpen] = useState(false)
 
-
   return (
     <AppBar
       position='sticky'
     // sx={{backgroundColor : 'green'}} 
     >
       <StyledToolbar>
-        <Box flex={1}
+        <Box 
           sx={{
             display: 'flex',
             height: { xs: 80, sm: 'auto' },
-            padding: { xs: 2, sm: 0 },
-            // border : '1px solid red',
-            // backgroundColor : 'red'
+            padding: { xs: 0, sm: 0 },
+            marginRight : { xs : .5, sm : 2},
           }}
         >
-          <Box>
+          <Box  >
 
             <Typography
               variant='h6'
+              pt={1}
               sx={{
                 display: { xs: 'block', sm: 'block' },
                 fontFamily: 'roboto',
@@ -80,26 +79,32 @@ function Navbar({ mode, setMode, sideBar, setSidebar, rightBar, setRightBar }) {
                 fontSize: '1.5rem',
                 letterSpacing: '.1rem',
                 color: 'inherit',
+                
               }}
             >
               MeeT
             </Typography>
-            <IconButton sx={{display : { sx : 'block', sm :'none'}}}  >
+            {/* <IconButton sx={{display : { sx : 'block', sm :'none'}}}  >
               {mode === 'light' ? <ModeNightOutlinedIcon sx={{ color: 'white' }} onClick={() => setMode('dark')} /> : <LightModeIcon onClick={() => setMode('light')} />}
-            </IconButton>
+            </IconButton> */}
           </Box>
 
-          <Stack ml={4} direction='row' sx={{ display: { xs: 'block', sm: 'none', } }}>
-            <IconButton onClick={(e)=> setSidebar(!sideBar) } >
+          <Stack mt={1}  direction='row' sx={{ display: { xs: 'block', sm: 'none', }, }}>
+            <IconButton sx={{padding:'0'}}  onClick={(e)=> setSidebar(!sideBar) } >
               <Tooltip title='Menu' >
                 <DrawerMenu appendSide={'left'} />
                 {/* <MenuIcon sx={{ color: "white" }} /> */}
               </Tooltip>
             </IconButton>
-            <IconButton>
+            <IconButton sx={{padding:'0'}}>
               <Tooltip title='Messenger' >
                 <DrawerMenu appendSide={'right'} />
                 {/* <ForumIcon sx={{ color: "white" }} /> */}
+              </Tooltip>
+            </IconButton>
+            <IconButton sx={{padding:'0'}}  >
+              <Tooltip title='Messenger' >
+                {mode === 'light' ? <ModeNightOutlinedIcon sx={{ color: 'white' }} onClick={() => setMode('dark')} /> : <LightModeIcon onClick={() => setMode('light')} />}
               </Tooltip>
             </IconButton>
           </Stack>
@@ -142,15 +147,15 @@ function Navbar({ mode, setMode, sideBar, setSidebar, rightBar, setRightBar }) {
             />
           </IconButton>
         </Icons>
-        <UserBox sx={{ display: 'flex', justifyContent: 'center', alignItems: 'stretch' }}>
-          <Stack sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'stretch' }}>
-            <IconButton onClick={(e) => setOpen(true)} sx={{ color: 'white' }} aria-label="add an alarm">
-              <Avatar sx={{ width: 30, height: 30 }} alt="Remy Sharp" src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" />
+        <UserBox mt={1} sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-start' }}>
+          {/* <Stack mt={1} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'fle' }}> */}
+            <IconButton  onClick={(e) => setOpen(true)} sx={{ color: 'white' }} aria-label="profile setting">
+              <Avatar  sx={{ width: 30, height: 30 }} alt="Remy Sharp" src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" />
             </IconButton>
             {/* <IconButton>
                 {mode === 'light' ? <LightModeIcon onClick={() => setMode('dark')} /> : <ModeNightOutlinedIcon onClick={() => setMode('light')} />}
               </IconButton> */}
-          </Stack>
+          {/* </Stack> */}
         </UserBox>
       </StyledToolbar>
       <Menu
