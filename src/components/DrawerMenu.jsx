@@ -1,9 +1,9 @@
 import React from 'react'
-import { Box, Drawer, Button, List, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, IconButton, Tooltip    } from '@mui/material'
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, IconButton, Tooltip, CssBaseline, Paper, Typography, ListSubheader, Avatar, AppBar, Toolbar, ListItemAvatar, Badge } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import ForumIcon from '@mui/icons-material/Forum';
+import MailIcon from '@mui/icons-material/Mail';
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 
 //sidebar
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -16,123 +16,195 @@ import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
-//components
-import SideBar from './SideBar';
-import RightBar from './RightBar';
 
-function DrawerMenu({ appendSide}) {
+function DrawerMenu({ appendSide }) {
     const [state, setState] = React.useState({
         top: false,
         left: false,
         bottom: false,
         right: false,
-      });
+    });
 
-      const toggleDrawer = (anchor, open) => (event) => {
+    const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-          return;
+            return;
         }
-    
-        setState({ ...state, [anchor]: open });
-      };
-      const [menuList, setMenuList] = React.useState([
-        
-      ])
 
-      React.useEffect(()=> {
-        if ( appendSide === 'left'){
+        setState({ ...state, [anchor]: open });
+    };
+    const [menuList, setMenuList] = React.useState([
+
+    ])
+
+    React.useEffect(() => {
+        if (appendSide === 'left') {
             setMenuList([
-            { id: 1, icon: <HomeOutlinedIcon />, text: 'Home' },
-            { id: 2, icon: <GroupOutlinedIcon />, text: 'Friends' },
-            { id: 3, icon: <GroupsOutlinedIcon />, text: 'Groups' },
-            { id: 4, icon: <StorefrontOutlinedIcon />, text: 'Store' },
-            { id: 5, icon: <VideocamOutlinedIcon />, text: 'Videos' },
-            { id: 6, icon: <DescriptionOutlinedIcon />, text: 'Description' },
-            { id: 7, icon: <BookmarksOutlinedIcon />, text: 'Bookmarks' },
-            { id: 8, icon: <EventNoteOutlinedIcon />, text: 'Events' },
-            { id: 9, icon: <SettingsOutlinedIcon />, text: 'Settings' },
-        ])
-        } 
-        else if ( appendSide === 'right'){
+                { id: 1, icon: <HomeOutlinedIcon />, text: 'Home' },
+                { id: 2, icon: <GroupOutlinedIcon />, text: 'Friends' },
+                { id: 3, icon: <GroupsOutlinedIcon />, text: 'Groups' },
+                { id: 4, icon: <StorefrontOutlinedIcon />, text: 'Store' },
+                { id: 5, icon: <VideocamOutlinedIcon />, text: 'Videos' },
+                { id: 6, icon: <DescriptionOutlinedIcon />, text: 'Description' },
+                { id: 7, icon: <BookmarksOutlinedIcon />, text: 'Bookmarks' },
+                { id: 8, icon: <EventNoteOutlinedIcon />, text: 'Events' },
+                { id: 9, icon: <SettingsOutlinedIcon />, text: 'Settings' },
+            ])
+        }
+        else if (appendSide === 'right') {
             setMenuList('')
         }
-      }, [appendSide])
+    }, [appendSide])
+
+    const messages = [
+        {
+            id: 1,
+            primary: 'Brunch this week?',
+            secondary: "I'll be in the neighbourhood this week. Let's grab a bite to eat",
+            person: 'https://material-ui.com/static/images/avatar/5.jpg',
+        },
+        {
+            id: 2,
+            primary: 'Birthday Gift',
+            secondary: `Do you have a suggestion for a good present for John on his work
+            anniversary. I am really confused & would love your thoughts on it.`,
+            person: 'https://material-ui.com/static/images/avatar/2.jpg',
+        },
+        {
+            id: 3,
+            primary: 'Recipe to try',
+            secondary: 'I am try out this new BBQ recipe, I think this might be amazing',
+            person: 'https://material-ui.com/static/images/avatar/3.jpg',
+        },
+        {
+            id: 4,
+            primary: 'Yes!',
+            secondary: 'I have the tickets to the ReactConf for this year.',
+            person: '',
+        },
+        {
+            id: 5,
+            primary: "Doctor's Appointment",
+            secondary: 'My appointment for the doctor was rescheduled for next Saturday.',
+            person: 'https://material-ui.com/static/images/avatar/10.jpg',
+        },
+        {
+            id: 6,
+            primary: 'Discussion',
+            secondary: `Menus that are generated by the bottom app bar (such as a bottom
+            navigation drawer or overflow menu) open as bottom sheets at a higher elevation
+            than the bar.`,
+            person: 'https://material-ui.com/static/images/avatar/8.jpg',
+        },
+        {
+            id: 7,
+            primary: 'Summer BBQ',
+            secondary: `Who wants to have a cookout this weekend? I just got some furniture
+            for my backyard and would love to fire up the grill.`,
+            person: 'https://material-ui.com/static/images/avatar/1.jpg',
+        },
+    ];
 
 
-      const list = (anchor) => (
+    const list = (anchor) => (
         <Box
-          sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-          role="presentation"
-          onClick={toggleDrawer(anchor, false)}
-          onKeyDown={toggleDrawer(anchor, false)}
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
         >
-          {/* <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List> */}
-          {/* <SideBar/> */}
-          <List>
-          {menuList.length > 0 &&
-              menuList.map(item => {
-                  return (
-                    <ListItem key={item.id} disablePadding    >
-                      <ListItemButton component='a' href={`#${item.text}`} sx={{paddingLeft : 0}}>
-                        <ListItemIcon>
-                          {item.icon}
-                        </ListItemIcon>
-                        <ListItemText primary={item.text} />
-                      </ListItemButton>
-                    </ListItem>
-                  )
-              })
-            }
-          </List>
-        </Box>
-      );
+            {appendSide === 'left'
+                ?
+                <List>
+                    {menuList.length > 0 &&
+                        menuList.map(item => {
+                            return (
+                                <ListItem pl={2} key={item.id}     >
+                                    <ListItemButton component='a' href={`#${item.text}`} sx={{ paddingLeft: 0 }}>
+                                        <ListItemIcon>
+                                            {item.icon}
+                                        </ListItemIcon>
+                                        <ListItemText primary={item.text} />
+                                    </ListItemButton>
+                                </ListItem>
+                            )
+                        })
+                    }
+                </List>
+                :
+                <React.Fragment>
+                    <CssBaseline />
+                    <Paper square sx={{ pb: '50px' }}>
+                        <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
+                            Inbox
+                        </Typography>
+                        <List sx={{ mb: 2 }}>
+                            {messages.map(({ id, primary, secondary, person }) => (
+                                <React.Fragment key={id}>
+                                    {id === 1 && (
+                                        <ListSubheader sx={{ bgcolor: 'background.paper' }}>
+                                            Today
+                                        </ListSubheader>
+                                    )}
 
-  return (
-    <div>
-    {/* {['left', 'right', 'top', 'bottom'].map((anchor) => ( */}
-    { [ appendSide ==='left' ? 'left' : 'right'].map((anchor) => (
-      <React.Fragment key={anchor}>
-        <Tooltip title='Menu' >
-            <IconButton onClick={toggleDrawer(anchor, true)}>
-                {anchor === 'left' ? <MenuIcon sx={{ color: "white" }} />  : <ForumIcon sx={{ color: "white" }} />}
-            </IconButton>
-        </Tooltip>
-        {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
-        <Drawer
-          anchor={anchor}
-          open={state[anchor]}
-          onClose={toggleDrawer(anchor, false)}
-        >
-          {list(anchor)}
-        </Drawer>
-      </React.Fragment>
-    ))}
-  </div>
-  )
+                                    {id === 3 && (
+                                        <ListSubheader sx={{ bgcolor: 'background.paper' }}>
+                                            Yesterday
+                                        </ListSubheader>
+                                    )}
+
+                                    <ListItem button>
+                                        <ListItemAvatar>
+                                            <Avatar alt="Profile Picture" src={person} />
+                                        </ListItemAvatar>
+                                        <ListItemText primary={primary} secondary={secondary} />
+                                    </ListItem>
+                                </React.Fragment>
+                            ))}
+                        </List>
+                    </Paper>
+                    {/* <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, width : '100%'}}> */}
+                    <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, right: '0', width: 'inherit',  }}>
+                        <Toolbar sx={{display :'flex', justifyContent:'space-evenly' }}>
+                            <IconButton sx={{ color: 'white' }} aria-label="add an alarm">
+                                <Badge badgeContent={4} color="error">
+                                    <MailIcon color="white" />
+                                </Badge>
+                            </IconButton>
+                            <IconButton sx={{ color: 'white' }} aria-label="add an alarm">
+                                <Badge badgeContent={4} color="error">
+                                    <CircleNotificationsIcon color="white" />
+                                </Badge>
+                            </IconButton>
+                        </Toolbar>
+                    </AppBar>
+                </React.Fragment>
+            }
+        </Box>
+    );
+
+    return (
+        <div>
+            {/* {['left', 'right', 'top', 'bottom'].map((anchor) => ( */}
+            {[appendSide === 'left' ? 'left' : 'right'].map((anchor) => (
+                <React.Fragment key={anchor}>
+                    <Tooltip title='Menu' >
+                        <IconButton onClick={toggleDrawer(anchor, true)}>
+                            {anchor === 'left' ? <MenuIcon sx={{ color: "white" }} /> : <ForumIcon sx={{ color: "white" }} />}
+                        </IconButton>
+                    </Tooltip>
+                    {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
+                    <Drawer
+                        anchor={anchor}
+                        open={state[anchor]}
+                        onClose={toggleDrawer(anchor, false)}
+
+                    >
+                        {list(anchor)}
+                    </Drawer>
+                </React.Fragment>
+            ))}
+        </div>
+    )
 }
 
 export default DrawerMenu

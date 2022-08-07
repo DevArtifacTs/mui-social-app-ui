@@ -26,6 +26,7 @@ const Search = styled('div')(({ theme }) => ({
 
 }))
 
+// Box is div with display : flex based
 const Icons = styled(Box)(({ theme }) => ({
   display: 'none',
   gap: '20px',
